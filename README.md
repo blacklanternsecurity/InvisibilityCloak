@@ -41,6 +41,8 @@ The below string candidates are not included in obfuscation
 * `-d, --directory` - directory where your visual studio project is located
 * `-m, --method` - obfuscation method (base64, rot13, reverse)
 * `-n, --name` - name of your new tool
+* `-i, --ignore` - comma-separated list of projects to ignore (e.g., "CommonDependencies,OtherProject")
+* `-o, --output` - output CSV file for project mapping (e.g., "mapping.csv")
 * `-h, --help` - help menu
 * `--version` - get version of tool
 
@@ -71,6 +73,16 @@ The below string candidates are not included in obfuscation
 `python InvisibilityCloak.py -d /path/to/project -n "TotallyLegitTool"`
 
 `python InvisibilityCloak.py -d C:\path\to\project -n "TotallyLegitTool"`
+
+### Save project name mapping to CSV file
+
+You can use the `-o/--output` option to save the original and new project names to a CSV file:
+
+`python InvisibilityCloak.py -d /path/to/project -n "TotallyLegitTool" -o mapping.csv`
+
+`python InvisibilityCloak.py -d C:\path\to\project -n "TotallyLegitTool" -m base64 -o mapping.csv`
+
+This will create a CSV file with the mapping of original project names to their new obfuscated names, which is useful for documentation or reference purposes.
 
 ## Signature-Based Detection Statistics
 
