@@ -1630,26 +1630,16 @@ def update_csproj_file(
         csproj_content = csproj_content.replace(
             mapping["old_guid"], mapping["new_guid"])
 
-        # Update AssemblyName element to match the new project name
+        # Update AssemblyName and RootNamespace elements to the new project name
+        # Use a more general pattern that matches any value
         csproj_content = sub(
-            r'<AssemblyName>' +
-            escape(
-                mapping["old_name"]) +
-            r'</AssemblyName>',
-            r'<AssemblyName>' +
-            mapping["new_name"] +
-            r'</AssemblyName>',
+            r'<AssemblyName>[^<]+</AssemblyName>',
+            f'<AssemblyName>{mapping["new_name"]}</AssemblyName>',
             csproj_content)
 
-        # Update RootNamespace element to match the new project name
         csproj_content = sub(
-            r'<RootNamespace>' +
-            escape(
-                mapping["old_name"]) +
-            r'</RootNamespace>',
-            r'<RootNamespace>' +
-            mapping["new_name"] +
-            r'</RootNamespace>',
+            r'<RootNamespace>[^<]+</RootNamespace>',
+            f'<RootNamespace>{mapping["new_name"]}</RootNamespace>',
             csproj_content)
 
         # Update signing key files (.snk)
